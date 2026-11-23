@@ -1,0 +1,9 @@
+{
+  "name": "ghost-japanese",
+  "private": true,
+  "version": "5.2.0-dev",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check app-core.js && node --check kanji-data.js && node --check sw.js"
+  }
+}
