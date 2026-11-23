@@ -133,3 +133,20 @@ test('kanji drill requires reveal and explicit next between grades', () => {
   assert.notEqual(drill.currentId, first)
   assert.equal(drill.revealed, false)
 })
+
+
+test('unreviewed lessons never masquerade as verified meaning or reading classifications', () => {
+  const pending = KANJI_LESSONS.filter(item => item.reviewStatus !== 'reviewed')
+  assert.equal(pending.length, 906)
+  for (const category of ['similar','different','partial']) {
+    const found = filterKanjiLessons(KANJI_LESSONS, { meaningRelation: category })
+    assert.ok(found.every(item => item.reviewStatus === 'reviewed'))
+  }
+  for (const category of ['on','kun','mixed','special']) {
+    const found = filterKanjiLessons(KANJI_LESSONS, { readingType: category })
+    assert.ok(found.every(item => item.reviewStatus === 'reviewed'))
+  }
+  assert.equal(filterKanjiLessons(KANJI_LESSONS, { meaningRelation: 'pending' }).length, 906)
+  assert.equal(filterKanjiLessons(KANJI_LESSONS, { readingType: 'pending' }).length, 906)
+  assert.equal(filterKanjiLessons(KANJI_LESSONS, { meaningRelation: 'pending', readingType: 'on' }).length, 0)
+})

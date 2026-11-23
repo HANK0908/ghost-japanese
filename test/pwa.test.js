@@ -53,7 +53,7 @@ test('HTML compatibility loader and service worker use the same versioned module
 
   assert.equal(html.includes('app-core.js?v=5.2.1'), true)
   assert.equal(html.includes('kanji-data.js?v=5.2.1'), true)
-  assert.equal(calls.opened[0], 'ghost-notebook-v522-preview')
+  assert.equal(calls.opened[0], 'ghost-notebook-v526-reviewed-drill')
   assert.equal(calls.added.includes('./app-core.js?v=5.2.1'), true)
   assert.equal(calls.added.includes('./kanji-data.js?v=5.2.1'), true)
 })

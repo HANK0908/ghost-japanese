@@ -19081,8 +19081,10 @@
     const query = String(filters.query || '').trim().toLocaleLowerCase('ja-JP')
     return lessons.filter((item) => {
       if (filters.partOfSpeech && item.partOfSpeech !== filters.partOfSpeech) return false
-      if (filters.meaningRelation && item.meaningRelation !== filters.meaningRelation) return false
-      if (filters.readingType && item.readingType !== filters.readingType) return false
+      if (filters.meaningRelation === 'pending' && item.reviewStatus === 'reviewed') return false
+      if (filters.meaningRelation && filters.meaningRelation !== 'pending' && (item.reviewStatus !== 'reviewed' || item.meaningRelation !== filters.meaningRelation)) return false
+      if (filters.readingType === 'pending' && item.reviewStatus === 'reviewed') return false
+      if (filters.readingType && filters.readingType !== 'pending' && (item.reviewStatus !== 'reviewed' || item.readingType !== filters.readingType)) return false
       if (!query) return true
       return [item.written, item.reading, item.meaningZhTw, item.note]
         .join(' ')
