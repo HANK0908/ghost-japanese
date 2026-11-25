@@ -1,4 +1,4 @@
-const CACHE = 'ghost-notebook-v526-reviewed-drill'
+const CACHE = 'ghost-notebook-v6.1-pos-1'
 const ASSETS = [
   './',
   './index.html',
